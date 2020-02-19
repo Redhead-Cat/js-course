@@ -4,16 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Lesson2</title>
+    <title>Lesson3</title>
 </head>
 <body>
-    <h1>JS beginning</h1>
+    <h1>Conditional operators</h1>
     <script>
-        let userName='Katherine Terk, ';
-        let userAge='32 years old!';
-        let msgHello='Hello, dear ';
-        let helloUser=msgHello+userName+userAge;
-        alert(helloUser);
+        "use strict"
+        let userName=prompt('enter your name','');
+        let userAge=prompt('enter your age','');
+        let msgQuestion=confirm('Do you drink alcohol?','');
+        let answer;
+        if (msgQuestion && userAge > 40){
+               answer='Do not have to abuse alcohol!';
+               alert(answer);
+        } else if (msgQuestion && userAge < 40 && userAge > 18){
+               answer='Only do not mix vodka with beer!';
+               alert(answer);
+        } else if (msgQuestion && userAge < 18){
+               answer='Come on?!I will tell your mom!';
+               alert(answer);
+        } else answer='Way to go!';
+        alert(answer);     
     </script>
 </body>
 </html>
