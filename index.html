@@ -14,17 +14,22 @@
         let userAge=prompt('enter your age','');
         let msgQuestion=confirm('Do you drink alcohol?','');
         let answer;
+        let msgAnswer;
         if (msgQuestion && userAge > 40){
                answer='Do not have to abuse alcohol!';
-               alert(answer);
+               msgAnswer = userName + ' ' + answer;
+               alert(msgAnswer);
         } else if (msgQuestion && userAge < 40 && userAge > 18){
                answer='Only do not mix vodka with beer!';
-               alert(answer);
+               msgAnswer = userName + ' ' + answer;
+               alert(msgAnswer);
         } else if (msgQuestion && userAge < 18){
                answer='Come on?!I will tell your mom!';
-               alert(answer);
+               msgAnswer = userName + ' ' + answer;
+               alert(msgAnswer);
         } else answer='Way to go!';
-        alert(answer);     
+        msgAnswer = userName + ' ' + answer;
+        alert(msgAnswer);     
     </script>
 </body>
 </html>
