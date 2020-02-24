@@ -4,32 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Lesson3</title>
+    <title>Lesson4</title>
 </head>
 <body>
-    <h1>Conditional operators</h1>
+    <h1>Conditions and cycles</h1>
     <script>
         "use strict"
-        let userName=prompt('enter your name','');
-        let userAge=prompt('enter your age','');
-        let msgQuestion=confirm('Do you drink alcohol?','');
-        let answer;
-        let msgAnswer;
-        if (msgQuestion && userAge > 40){
-               answer='Do not have to abuse alcohol!';
-               msgAnswer = userName + ' ' + answer;
-               alert(msgAnswer);
-        } else if (msgQuestion && userAge <= 40 && userAge >= 18){
-               answer='Only do not mix vodka with beer!';
-               msgAnswer = userName + ' ' + answer;
-               alert(msgAnswer);
-        } else if (msgQuestion && userAge < 18){
-               answer='Come on?!I will tell your mom!';
-               msgAnswer = userName + ' ' + answer;
-               alert(msgAnswer);
-        } else answer='Way to go!';
-        msgAnswer = userName + ' ' + answer;
-        alert(msgAnswer);     
+         let num=Number(prompt('Enter start number',''));
+         let point='';
+         let triangle='';
+         if (!isNaN(num)) {
+               for(let i=0;i<num;i++){
+                point=point + '*';
+                triangle=triangle + '\n' + point;
+                 }
+           console.log(triangle);
+         } else {
+            alert('Enter a number, please!')
+         }
     </script>
 </body>
 </html>
