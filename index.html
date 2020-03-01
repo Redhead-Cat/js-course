@@ -4,23 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Lesson4</title>
+    <title>Lesson5</title>
 </head>
 <body>
-    <h1>Conditions and cycles</h1>
+    <h1>Functions</h1>
     <script>
         "use strict"
          let num=Number(prompt('Enter start number',''));
-         let point='';
-         let triangle='';
-         if (!isNaN(num)) {
-               for(let i=0;i<num;i++){
-                point +='*';
-                triangle +='\n' + point;
-                 }
-           console.log(triangle);
+         let a=Number(prompt('Enter first number', ''));
+         let b=Number(prompt('Enter second number', ''));
+         const pi=3.14159265359;
+
+         function calcArea() {
+             return (pi*num**2);
+         }
+         
+         function calcLength() {
+             return (2*pi*num);
+         }
+
+         function calcAverage() {
+             return ((a+b)/2);
+         }  
+         
+         function calcMath(a,b,oper) {
+           let c=a+oper+b;
+           return eval(c);
+         }
+
+         if (!isNaN(num) && !isNaN(a) && !isNaN(b)){
+         let circleArea=calcArea();
+         let circLength=calcLength();
+         let average=calcAverage();
+         let resMath=calcMath(a,b,'*');
+           console.log('Area of circle '+circleArea);
+           console.log('Length of circle '+circLength);
+           console.log('Avarage of numbers '+average);
+           console.log('Result of math actions '+resMath);
          } else {
-            alert('Enter a number, please!')
+            alert('Enter a number, please!');
          }
     </script>
 </body>
