@@ -4,46 +4,113 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Lesson5</title>
+    <title>Lesson6</title>
 </head>
 <body>
-    <h1>Functions</h1>
+    <h1>Arrays</h1>
     <script>
-        "use strict"
-         let num=Number(prompt('Enter start number',''));
-         let a=Number(prompt('Enter first number', ''));
-         let b=Number(prompt('Enter second number', ''));
-         const pi=3.14159265359;
+       let students=[
+           {
+               name:'Jane',
+               age:24,
+               gender:'female',
+           },
 
-         function calcArea() {
-             return (pi*num**2);
-         }
-         
-         function calcLength() {
-             return (2*pi*num);
-         }
+           {
+               name:'Nick',
+               age:25,
+               gender:'male', 
+           },
 
-         function calcAverage() {
-             return ((a+b)/2);
-         }  
-         
-         function calcMath(a,b,oper) {
-           let c=a+oper+b;
-           return eval(c);
-         }
+           {
+               name:'Alex',
+               age:24,
+               gender:'male', 
+           },
 
-         if (!isNaN(num) && !isNaN(a) && !isNaN(b)){
-         let circleArea=calcArea();
-         let circLength=calcLength();
-         let average=calcAverage();
-         let resMath=calcMath(a,b,'*');
-           console.log('Area of circle '+circleArea);
-           console.log('Length of circle '+circLength);
-           console.log('Avarage of numbers '+average);
-           console.log('Result of math actions '+resMath);
-         } else {
-            alert('Enter a number, please!');
-         }
+           {
+               name:'Rose',
+               age:25,
+               gender:'female', 
+           },
+
+           {
+               name:'Charlie',
+               age:25,
+               gender:'male', 
+           }
+       ];
+        
+        
+       function getAverageAge() {
+
+        let average=0;    
+
+        for (let i=0;i <= students.length - 1;i++) {
+
+             let key=students[i].age;
+
+             average+=key;
+           }
+
+           let averageAge = average / students.length;
+
+           return averageAge;
+        };
+
+        function checkMostGender(){
+
+           let male=1;
+           let female=1;
+
+           for (let j=0;j <= students.length - 1;j++){
+
+               let gender=students[j].gender;
+
+               if (students[j].gender==='male'){
+
+                  male+=male;
+
+                } else{
+
+                    female+=female;
+
+                    }
+                }
+           if (male > female){
+
+               return gender='male';
+
+            } else{
+
+               return gender='female';
+              } 
+
+           }
+           
+           
+    let arr = [1,2,3,4,5,6];
+
+    function clone() {
+        let newArr = arr.slice();
+        return newArr;
+    }
+
+     let brr=clone(arr);
+
+     brr[0] = 42;
+     
+     
+     let evenNum=arr.filter(function(number) {
+               return (number%2===0);
+    });
+
+    console.log('Average age of the students is ' + getAverageAge(students));
+    console.log ('Most gender of the students is ' + checkMostGender(students));
+    console.log(brr);
+    console.log(arr);
+    console.log(evenNum);
+
     </script>
 </body>
 </html>
