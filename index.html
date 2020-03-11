@@ -91,25 +91,39 @@
            
     let arr = [1,2,3,4,5,6];
 
-    function clone() {
-        let newArr = arr.slice();
+    function clone(a) {
+        let newArr = [];
+        a=newArr;
+        for (let i=0; i<= arr.length - 1; i++) {
+            let key=arr[i];
+            newArr[i]=key; 
+        }
         return newArr;
     }
 
      let brr=clone(arr);
-
      brr[0] = 42;
      
+     function isEven(x) {
+            return x % 2 === 0; 
+          }
      
-     let evenNum=arr.filter(function(number) {
-               return (number%2===0);
-    });
+     function filter(x,y){
+          let evenArr=[];
+          for(let i=0; i<=arr.length - 1;i++){
+              let newIndex=evenArr.length;
+              if (y(arr[i])) {
+                  evenArr[newIndex]=arr[i];
+              }
+          }
+          return evenArr;
+     }
 
     console.log('Average age of the students is ' + getAverageAge(students));
     console.log ('Most gender of the students is ' + checkMostGender(students));
     console.log(brr);
     console.log(arr);
-    console.log(evenNum);
+    console.log(filter(arr, isEven));
 
     </script>
 </body>
