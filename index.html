@@ -9,7 +9,7 @@
 <body>
     <h1>Functions & objects</h1>
     <script>
-
+     'use strict'
       let origin={
         a:2,
         b:3,
@@ -47,7 +47,7 @@
     }
   function sumAll() {
       let res=0;
-      for(i=0; i<= arguments.length - 1; i++){
+      for(let i=0; i<= arguments.length - 1; i++){
          res+=arguments[i];
       }
       return res;
@@ -56,7 +56,7 @@
         let arr=[arguments];
         let resMin=arguments[0];
         let resMax=0;
-        for(i=0;i<= arguments.length - 1;i++){
+        for(let i=0;i<= arguments.length - 1;i++){
             if(arguments[i]>resMax){
                 resMax=arguments[i];
             } else{
