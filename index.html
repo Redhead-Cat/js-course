@@ -4,127 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Lesson6</title>
+    <title>Lesson7</title>
 </head>
 <body>
-    <h1>Arrays</h1>
+    <h1>Functions & objects</h1>
     <script>
-       let students=[
-           {
-               name:'Jane',
-               age:24,
-               gender:'female',
-           },
 
-           {
-               name:'Nick',
-               age:25,
-               gender:'male', 
-           },
+      let origin={
+        a:2,
+        b:3,
+        c:4,
+        d: {
+            x:22,
+            y:33,
+            z:44,
+        },
+       };
+       let target = {};
 
-           {
-               name:'Alex',
-               age:24,
-               gender:'male', 
-           },
+       function copy(x,y) {
+       let key;
 
-           {
-               name:'Rose',
-               age:25,
-               gender:'female', 
-           },
+        for (key in y) {
+          x[key] = y[key];
+         }
 
-           {
-               name:'Charlie',
-               age:25,
-               gender:'male', 
-           }
-       ];
-        
-        
-       function getAverageAge() {
+        return x;
+      }
 
-        let average=0;    
+    function getNumberOfEven(n) {
+        n=String(n);
+        let count = 0;
 
-        for (let i=0;i <= students.length - 1;i++) {
+        for (let i=0; i < n.length; i++) {
 
-             let key=students[i].age;
+            if (n[i] % 2 == 0) {
+              count++;
+            }
 
-             average+=key;
-           }
-
-           let averageAge = average / students.length;
-
-           return averageAge;
-        };
-
-        function checkMostGender(){
-
-           let male=1;
-           let female=1;
-
-           for (let j=0;j <= students.length - 1;j++){
-
-               let gender=students[j].gender;
-
-               if (students[j].gender==='male'){
-
-                  male+=male;
-
-                } else{
-
-                    female+=female;
-
-                    }
-                }
-           if (male > female){
-
-               return gender='male';
-
-            } else{
-
-               return gender='female';
-              } 
-
-           }
-           
-           
-    let arr = [1,2,3,4,5,6];
-
-    function clone(a) {
-        let newArr = [];
-        a=newArr;
-        for (let i=0; i<= arr.length - 1; i++) {
-            let key=arr[i];
-            newArr[i]=key; 
         }
-        return newArr;
+        return count;
+    }
+  function sumAll() {
+      let res=0;
+      for(i=0; i<= arguments.length - 1; i++){
+         res+=arguments[i];
+      }
+      return res;
+  }
+    function mathMinMax() {
+        let arr=[arguments];
+        let resMin=arguments[0];
+        let resMax=0;
+        for(i=0;i<= arguments.length - 1;i++){
+            if(arguments[i]>resMax){
+                resMax=arguments[i];
+            } else{
+                resMin=arguments[i];
+            }
+        }
+        arr[0]=resMin;
+        arr[1]=resMax;
+
+        return arr;
     }
 
-     let brr=clone(arr);
-     brr[0] = 42;
-     
-     function isEven(x) {
-            return x % 2 === 0; 
-          }
-     
-     function filter(x,y){
-          let evenArr=[];
-          for(let i=0; i<=arr.length - 1;i++){
-              let newIndex=evenArr.length;
-              if (y(arr[i])) {
-                  evenArr[newIndex]=arr[i];
-              }
-          }
-          return evenArr;
-     }
-
-    console.log('Average age of the students is ' + getAverageAge(students));
-    console.log ('Most gender of the students is ' + checkMostGender(students));
-    console.log(brr);
-    console.log(arr);
-    console.log(filter(arr, isEven));
-
+    console.log(copy(target,origin));
+    console.log(getNumberOfEven('223344'));
+    console.log(getNumberOfEven('1111'));
+    console.log(sumAll());
+    console.log(sumAll(1,2));  
+    console.log(sumAll(1,2,3));
+    console.log(sumAll(1,2,3,4));
+    console.log(mathMinMax(1, 2, 3, 4, 5));
+    console.log(mathMinMax(3, 4, 8, 5, 7, 2, 3, 0));
     </script>
 </body>
 </html>
