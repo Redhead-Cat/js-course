@@ -4,80 +4,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Lesson7</title>
+    <title>Lesson8</title>
 </head>
 <body>
-    <h1>Functions & objects</h1>
+    <h1>Arrays methods</h1>
     <script>
      'use strict'
-      let origin={
-        a:2,
-        b:3,
-        c:4,
-        d: {
-            x:22,
-            y:33,
-            z:44,
-        },
-       };
-       let target = {};
 
-       function copy(x,y) {
-       let key;
+      const arr=[-246, 753, -468, 475, -683, 476, -583, 746, -581];
+      const brr= arr.filter(cb);
+      const crr= arr.map(cb2);
+      const str = '12, 42, 63, 56, 122, 17, 117, 25, 645, 722, 964';
+      const strArray=str.split(','); 
+      const strArrayNum=strArray.map(cb3);
+      const strArrayEven=strArrayNum.filter(cb4);
+      const scheme = [
 
-        for (key in y) {
-          x[key] = y[key];
+         ['name', 'Vasya'],
+
+         ['age', 25],
+
+        ['score', 95]
+
+      ];
+    const schemeObj= {
+
+       name: 'Vasya',
+
+       age: 25,
+
+       score: 95
+    }
+
+
+      function sum(newArray) {
+          let calcSum=0;
+          for(let i=0;i<=newArray.length - 1;i++){
+           calcSum+=newArray[i];  
+          }
+          return calcSum;
+      } 
+
+      function cb(value) {
+          return value < 0;
+      }  
+      function cb2(item){
+        return  item / 2;
+      }
+      function cb3(item){
+          return +item;
+      }
+      function cb4(item){
+         if(item % 2===0){
+            return item;
          }
-
-        return x;
+      }
+      function makeObjectFromScheme(array) {
+           let obj={};
+      for(let i in array) {
+          obj[array[i][0]]=array[i][1];
+      }
+           return obj;
       }
 
-    function getNumberOfEven(n) {
-        n=String(n);
-        let count = 0;
-
-        for (let i=0; i < n.length; i++) {
-
-            if (n[i] % 2 == 0) {
-              count++;
-            }
-
-        }
-        return count;
-    }
-  function sumAll() {
-      let res=0;
-      for(let i=0; i<= arguments.length - 1; i++){
-         res+=arguments[i];
+     function makeArrayFromObj(object){
+          let array=[];
+          let keys=Object.keys(object);
+          let length=keys.length;
+          for(let i=0;i<=length - 1;i++){
+            array[i]=[keys[i],object[keys[i]]];        
+          }
+          return array;
       }
-      return res;
-  }
-    function mathMinMax() {
-        let arr=[arguments];
-        let resMin=arguments[0];
-        let resMax=0;
-        for(let i=0;i<= arguments.length - 1;i++){
-            if(arguments[i]>resMax){
-                resMax=arguments[i];
-            } else{
-                resMin=arguments[i];
-            }
-        }
-        arr[0]=resMin;
-        arr[1]=resMax;
 
-        return arr;
-    }
+console.log(Object.keys(schemeObj).length);
 
-    console.log(copy(target,origin));
-    console.log(getNumberOfEven('223344'));
-    console.log(getNumberOfEven('1111'));
-    console.log(sumAll());
-    console.log(sumAll(1,2));  
-    console.log(sumAll(1,2,3));
-    console.log(sumAll(1,2,3,4));
-    console.log(mathMinMax(1, 2, 3, 4, 5));
-    console.log(mathMinMax(3, 4, 8, 5, 7, 2, 3, 0));
+
+console.log(sum(arr));
+console.log(brr);
+console.log(arr.sort(function(a, b) {
+  return a - b;
+}));
+console.log(arr.sort(function(a,b){
+    return b-a;
+}));
+console.log(crr);
+console.log(strArray);
+console.log(strArrayNum);
+console.log(strArrayEven);
+console.log(makeObjectFromScheme(scheme));
+console.log(makeArrayFromObj(schemeObj));
     </script>
 </body>
 </html>
