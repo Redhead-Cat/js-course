@@ -9,30 +9,34 @@
 <body>
     <h1>Arrays methods</h1>
     <script>
-     'use strict'
+    'use strict'
+
 
       const arr=[-246, 753, -468, 475, -683, 476, -583, 746, -581];
-      const brr= arr.filter(cb);
-      const crr= arr.map(cb2);
+      const brr= arr.filter( function(value) {
+                             return value < 0;
+                            });
+      const crr= arr.map(function(item){
+                     return  item / 2;
+                            });
       const str = '12, 42, 63, 56, 122, 17, 117, 25, 645, 722, 964';
       const strArray=str.split(','); 
-      const strArrayNum=strArray.map(cb3);
-      const strArrayEven=strArrayNum.filter(cb4);
+      const strArrayNum=strArray.map(function(item){
+                                   return +item;
+                                   });
+      const strArrayEven=strArrayNum.filter( function(item){
+                               if(item % 2===0){
+                                return item;
+                                   }
+                                 });
       const scheme = [
-
          ['name', 'Vasya'],
-
          ['age', 25],
-
-        ['score', 95]
-
+         ['score', 95]
       ];
     const schemeObj= {
-
        name: 'Vasya',
-
        age: 25,
-
        score: 95
     }
 
@@ -45,20 +49,6 @@
           return calcSum;
       } 
 
-      function cb(value) {
-          return value < 0;
-      }  
-      function cb2(item){
-        return  item / 2;
-      }
-      function cb3(item){
-          return +item;
-      }
-      function cb4(item){
-         if(item % 2===0){
-            return item;
-         }
-      }
       function makeObjectFromScheme(array) {
            let obj={};
       for(let i in array) {
@@ -76,9 +66,6 @@
           }
           return array;
       }
-
-console.log(Object.keys(schemeObj).length);
-
 
 console.log(sum(arr));
 console.log(brr);
