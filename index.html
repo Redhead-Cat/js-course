@@ -4,83 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Lesson8</title>
+    <title>Lesson9</title>
 </head>
 <body>
-    <h1>Arrays methods</h1>
+    <h1>Object methods</h1>
     <script>
     'use strict'
+    let keys=[  ['value', 42, true, false, false],
+                ['value2', true, false, false, false],
+                ['value3', 'Hello', true, true, true]
+              ];
 
+let obj1 = {
+    value: 42,
+    value2: true
+}
 
-      const arr=[-246, 753, -468, 475, -683, 476, -583, 746, -581];
-      const brr= arr.filter( function(value) {
-                             return value < 0;
-                            });
-      const crr= arr.map(function(item){
-                     return  item / 2;
-                            });
-      const str = '12, 42, 63, 56, 122, 17, 117, 25, 645, 722, 964';
-      const strArray=str.split(','); 
-      const strArrayNum=strArray.map(function(item){
-                                   return +item;
-                                   });
-      const strArrayEven=strArrayNum.filter( function(item){
-                               if(item % 2===0){
-                                return item;
-                                   }
-                                 });
-      const scheme = [
-         ['name', 'Vasya'],
-         ['age', 25],
-         ['score', 95]
-      ];
-    const schemeObj= {
-       name: 'Vasya',
-       age: 25,
-       score: 95
-    }
+let obj2 = {
+    value: 42,
+    value2: true
+}          
 
+   function createObject(arr){
+      let obj={};
 
-      function sum(newArray) {
-          let calcSum=0;
-          for(let i=0;i<=newArray.length - 1;i++){
-           calcSum+=newArray[i];  
+      for(let i=0; i<= arr.length - 1;i++) {
+      Object.defineProperty(obj,arr[i][0],{
+      value:arr[i][1], 
+      enumerable:arr[i][2],
+      writable:arr[i][3],
+      configurable:arr[i][4]
+      });
+      }
+      return obj;
+   }
+   //first way 
+   function compareObj1 (object1,object2){
+     for(let prop in object1){
+         if(object1[prop]!==object2[prop]){
+           return false;
           }
-          return calcSum;
-      } 
-
-      function makeObjectFromScheme(array) {
-           let obj={};
-      for(let i in array) {
-          obj[array[i][0]]=array[i][1];
-      }
-           return obj;
-      }
-
-     function makeArrayFromObj(object){
-          let array=[];
-          let keys=Object.keys(object);
-          let length=keys.length;
-          for(let i=0;i<=length - 1;i++){
-            array[i]=[keys[i],object[keys[i]]];        
-          }
-          return array;
-      }
-
-console.log(sum(arr));
-console.log(brr);
-console.log(arr.sort(function(a, b) {
-  return a - b;
-}));
-console.log(arr.sort(function(a,b){
-    return b-a;
-}));
-console.log(crr);
-console.log(strArray);
-console.log(strArrayNum);
-console.log(strArrayEven);
-console.log(makeObjectFromScheme(scheme));
-console.log(makeArrayFromObj(schemeObj));
+     }
+     for(let prop in object2){
+         if(object1[prop]!==object2[prop]){
+           return false;
+         }
+     }
+     return true;
+   } 
+    //second way    
+   function compareObj2 (object1, object2){
+   return JSON.stringify(object1)===JSON.stringify(object2);
+}
+  
+  console.log(createObject(keys));
+  console.log(compareObj1(obj1, obj2));
+  console.log(compareObj2(obj1, obj2));
     </script>
 </body>
 </html>
