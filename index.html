@@ -4,62 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Lesson9</title>
+    <title>Lesson10</title>
 </head>
 <body>
-    <h1>Object methods</h1>
+    <h1>DOM</h1>
+    <div class="container"></div>
     <script>
-    'use strict'
-    let keys=[  ['value', 42, true, false, false],
-                ['value2', true, false, false, false],
-                ['value3', 'Hello', true, true, true]
-              ];
+      'use strict';
+     const data=[1,2,3];
+      const dataNew=[1,2, [1.1,1.2,1.3] ,3];
+      const $container=document.querySelector('.container');
 
-let obj1 = {
-    value: 42,
-    value2: true
-}
-
-let obj2 = {
-    value: 42,
-    value2: true
-}          
-
-   function createObject(arr){
-      let obj={};
-
-      for(let i=0; i<= arr.length - 1;i++) {
-      Object.defineProperty(obj,arr[i][0],{
-      value:arr[i][1], 
-      enumerable:arr[i][2],
-      writable:arr[i][3],
-      configurable:arr[i][4]
-      });
+      function generateList(array) {
+       let listItems='';
+       const $list=document.createElement('ul');
+       array.forEach(function(el){
+          if(!Array.isArray(el)){
+          listItems+=`<li>${el}</li>`;  
+          $list.innerHTML=listItems;
+       } else {
+        for(let i=0;i<=el.length - 1;i++){
+          listItems +=`<ul>`+`<li>${el[i]}</li>`+`</ul>`;
+        }
+        
+       }});
+       return $container.append($list);
       }
-      return obj;
-   }
-   //first way 
-   function compareObj1 (object1,object2){
-     for(let prop in object1){
-         if(object1[prop]!==object2[prop]){
-           return false;
-          }
-     }
-     for(let prop in object2){
-         if(object1[prop]!==object2[prop]){
-           return false;
-         }
-     }
-     return true;
-   } 
-    //second way    
-   function compareObj2 (object1, object2){
-   return JSON.stringify(object1)===JSON.stringify(object2);
-}
-  
-  console.log(createObject(keys));
-  console.log(compareObj1(obj1, obj2));
-  console.log(compareObj2(obj1, obj2));
+
+      function getTable(data) {
+        let table = document.createElement('table');
+        table.border=1;
+        let count = 1;
+       for (let i = 0; i < data; i++) {
+        let tr = document.createElement('tr');
+        table.append(tr);
+       for (let j = 0; j < data; j++) {
+       let td = document.createElement('td');
+        td.innerHTML = count;
+        count++;
+        tr.append(td);
+            }
+        }
+        return $container.append(table);  
+      }
+      generateList(data);
+      generateList(dataNew);
+      getTable(10);
+
     </script>
 </body>
 </html>
