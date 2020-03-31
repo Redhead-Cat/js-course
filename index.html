@@ -4,53 +4,105 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Lesson10</title>
+    <title>Lesson11</title>
+    <style>
+      .box {
+        width:100px;
+        height: 100px;
+        margin-left:20px;
+        margin-bottom: 20px;
+        float: left;
+        border: 1px solid #000;
+       /* background: #000;*/
+        box-sizing: border-box;
+        cursor: pointer;
+      }
+      .box:last-child {
+        margin-bottom: 0;
+      }
+     /* .bg-green {
+        background: green;
+      }
+      .bg-blue {
+        background: blue;
+      }
+      .bg-yellow {
+        background: yellow;
+      }*/
+    </style>
 </head>
 <body>
-    <h1>DOM</h1>
-    <div class="container"></div>
+    <h1>DOM part 2</h1>
+    <div class="wrap">
+        <div class="box" style="background: #000;"></div>
+        <div class="box" style="background: #000;"></div>
+        <div class="box" style="background: #000;"></div>
+        <div class="box" style="background: #000;"></div>
+        <div class="box" style="background: #000;"></div>
+    </div>
     <script>
       'use strict';
-     const data=[1,2,3];
-      const dataNew=[1,2, [1.1,1.2,1.3] ,3];
-      const $container=document.querySelector('.container');
+     const $boxes=document.querySelectorAll('.box');
+    //First way, when we have styles in HTML
+           $boxes.forEach(function(box){
+        box.addEventListener('click', function(){
+          let bg=this.style.backgroundColor;
+         switch (bg) {
+        case 'black': this.style.backgroundColor = 'blue';
+        break;
+        case 'blue': this.style.backgroundColor = 'green';
+        break;
+        case'green': this.style.backgroundColor = 'yellow';
+        break;
+        default: this.style.backgroundColor = 'black';
+          }
+        });
+        box.addEventListener('click', function(){
+          const $wrap=document.querySelector('.wrap');
+           $wrap.append(this);
+        });  
+      });
+    //Second way? when we have styles in CSS
+     //$boxes.forEach(function(box){
+     //  box.addEventListener('click',function(){
+     //   let newClass=this.className;
+     //   switch(newClass){
+     //     case 'box': this.classList.add('bg-green');
+     //     break;
+     //     case 'box bg-green':this.classList.add('bg-blue');
+     //     break;
+     //     case 'box bg-green bg-blue':this.classList.add('bg-yellow');
+     //     break;
+     //     default: this.className='box';
+     //   }
+     //  });
+     //  box.addEventListener('click', function(){
+     //     const $wrap=document.querySelector('.wrap');
+     //      $wrap.append(this);
+     //   });  
+    // });
 
-      function generateList(array) {
-       let listItems='';
-       const $list=document.createElement('ul');
-       array.forEach(function(el){
-          if(!Array.isArray(el)){
-          listItems+=`<li>${el}</li>`;  
-          $list.innerHTML=listItems;
-       } else {
-        for(let i=0;i<=el.length - 1;i++){
-          listItems +=`<ul>`+`<li>${el[i]}</li>`+`</ul>`;
+  const $div=document.createElement('div');
+      $div.className='box shadow radius';
+      let str='border';
+      function toggleClass(element,str){
+        const classes=$div.className.split(' ');
+        const flag=classes.some(function(el){
+          return el===str;
+        })
+        if(flag){
+          const classIndex=classes.findIndex(function(el){
+            return el===str;
+          })
+          classes.splice(classIndex,1);
+        } else {
+          classes.push(str);
         }
-        
-       }});
-       return $container.append($list);
+       return $div.className=classes.join(' ');
       }
-
-      function getTable(data) {
-        let table = document.createElement('table');
-        table.border=1;
-        let count = 1;
-       for (let i = 0; i < data; i++) {
-        let tr = document.createElement('tr');
-        table.append(tr);
-       for (let j = 0; j < data; j++) {
-       let td = document.createElement('td');
-        td.innerHTML = count;
-        count++;
-        tr.append(td);
-            }
-        }
-        return $container.append(table);  
-      }
-      generateList(data);
-      generateList(dataNew);
-      getTable(10);
-
+      console.log(toggleClass($div,'border'));
+      console.log(toggleClass($div,'border'));
+      
     </script>
 </body>
 </html>
