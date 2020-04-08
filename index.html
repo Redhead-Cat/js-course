@@ -35,7 +35,23 @@
     .plus,.minus {
       margin-top: 10px;
     }
-   
+    [contenteditable="true"] {
+      min-height: 30px;
+      font-size: 20px;
+      line-height: 20px;
+      margin-bottom: 30px;
+      border: 1px solid;
+    }
+    .letter {
+      width: 30px;
+      height: 30px;
+      text-align: center;
+      line-height: 30px;
+      border: 1px solid;
+      margin-right: 15px;
+      float: left;
+    }
+
     </style>
 </head>
 <body>
@@ -74,6 +90,11 @@
         <button class="minus" type="button">-</button>
       </div>
   </div>
+  <div class="container">
+    <div class="enter_text" contenteditable="true"></div>
+  </div>
+  
+  
     
     <script>
       'use strict';
@@ -133,6 +154,14 @@
  }
  printData(linkObject);
 
+const $container=document.querySelector('.container');
+const $enter_text=document.querySelector('.enter_text');
+    $enter_text.addEventListener('input',function(){
+      const $div=document.createElement('div');
+      $div.classList.add('letter');
+      $div.innerHTML=this.textContent[this.textContent.length-1];
+      $container.append($div);
+    })
     </script>
 </body>
 </html>
