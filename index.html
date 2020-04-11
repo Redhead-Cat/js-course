@@ -4,164 +4,271 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Lesson12</title>
+    <title>Lesson13</title>
     <style>
-      .wrap, .wrap2 {
-        width: 100%;
-        overflow: hidden;
-      }
-      .box, .box2{
-        float: left;
-        width:100px;
-        height: 100px;
-        margin-left:20px;
+ 
+    .content {
+        float:left;
+        width:400px;
+        min-height: 30px;
         margin-bottom: 20px;
-        padding-top: 40px;
-        text-align: center;
-        border: 1px solid rgb(154, 205, 50);
-        background: rgba(154, 205, 50,0.8);
+        padding: 10px;
+        border: 1px solid yellowgreen;
+        border-radius: 10px;
+        background: rgba(154, 205, 50, 0.4);
+      }
+      .clear {
+        width: 70px;
+        height: 30px;
+        margin-left: 20px;
+        margin-top: 10px;
+        padding: 5px;
+        color:#fff;
+        border-radius: 5px;
+        border: none;
+        background: rgba(0,0,216,0.7);
+        box-shadow: 0 0 5px;
         box-sizing: border-box;
-        cursor: pointer;
+        text-transform: uppercase;
       }
-      .box:last-child,.box2:last-child{
-        clear: right;
-        margin-right: 50px;
+      .clearfix {
+        clear: both;
       }
-    .text_content {
-      display: block;;
-      width: 100%;
+  .keybord {
+    order:1;
+    margin-left: 20px;
+    border-collapse: collapse;
+    box-shadow: 0 0 5px;
+  }
+    td {
+      padding: 10px;
+      cursor: pointer;
+    }
+    
+    form {
+      border: 1px solid;
+      margin: 30px;
+      width: 300px;
       text-align: center;
     }
-    .plus,.minus {
-      margin-top: 10px;
+    .title {
+      font-weight: bold;
     }
-    [contenteditable="true"] {
-      min-height: 30px;
-      font-size: 20px;
-      line-height: 20px;
-      margin-bottom: 30px;
-      border: 1px solid;
+    .select_operation,.select_currency,.sum,.result {
+      margin-bottom: 10px;
     }
-    .letter {
-      width: 30px;
-      height: 30px;
-      text-align: center;
-      line-height: 30px;
-      border: 1px solid;
-      margin-right: 15px;
-      float: left;
-    }
-
+.sum {
+  margin-left: 10px;
+}
     </style>
 </head>
 <body>
-    <h1>DOM, BOM + Events</h1>
+    <h1>DOM, BOM + Events + Forms</h1>
+ 
     <div class="wrap">
-        <div class="box">0</div>
-        <div class="box">0</div>
-        <div class="box">0</div>
-        <div class="box">0</div>
-        <div class="box">0</div>
+      <div class="content"></div>
+      <button class="clear" type="button">Clear</button>
+      <div class="clearfix"></div>
+      <table class="keybord" border="1">
+        <tr>
+          <td>!</td>
+          <td>"</td>
+          <td>&</td>
+          <td>*</td>
+          <td>(</td>
+          <td>)</td>
+          <td>-</td>
+          <td>+</td>
+          <td>/</td>
+          <td>?</td>
+          <td>q</td>
+          <td>w</td>
+        </tr>
+        <tr>
+          <td>e</td>
+          <td>r</td>
+          <td>t</td>
+          <td>y</td>
+          <td>u</td>
+          <td>i</td>
+          <td>o</td>
+          <td>p</td>
+          <td>a</td>
+          <td>s</td>
+          <td>d</td>
+          <td>f</td>
+        </tr>
+        <tr>
+          <td>g</td>
+          <td>h</td>
+          <td>j</td>
+          <td>k</td>
+          <td>l</td>
+          <td>z</td>
+          <td>x</td>
+          <td>c</td>
+          <td>v</td>
+          <td>b</td>
+          <td>n</td>
+          <td>m</td>
+        </tr>
+      </table>
     </div>
-    <div class="wrap2">
-      <div class="box2">
-        <span class=text_content>0</span>
-        <button class="plus" type="button">+</button>
-        <button class="minus" type="button">-</button>
-      </div>
-      <div class="box2">
-        <span class=text_content>0</span>
-        <button class="plus" type="button">+</button>
-        <button class="minus" type="button">-</button>
-      </div>
-      <div class="box2">
-        <span class=text_content>0</span>
-        <button class="plus" type="button">+</button>
-        <button class="minus" type="button">-</button>
-      </div>
-      <div class="box2">
-        <span class=text_content>0</span>
-        <button class="plus" type="button">+</button>
-        <button class="minus" type="button">-</button>
-      </div>
-      <div class="box2">
-        <span class=text_content>0</span>
-        <button class="plus" type="button">+</button>
-        <button class="minus" type="button">-</button>
-      </div>
-  </div>
-  <div class="container">
-    <div class="enter_text" contenteditable="true"></div>
-  </div>
-  
-  
-    
+    <div class="table_wrap"></div>
+   <form id="exchange" action="">
+      <p class="title">Exchange Currency</p>
+      <div class="select_operation">
+      <label for="selling">Selling</label>
+      <input id="selling" type="radio" name="operation" value="selling">
+      <label for="buying">Buying</label>
+      <input id="buying" type="radio" name="operation" value="buying">
+    </div>
+    <div class="select_currency">
+    <label for="from">From</label>
+      <select class="from" id="from">
+        <option value="USD">$</option>
+        <option value="UAH">&#8372;</option>
+        <option value="EUR">&#8364;</option>
+      </select>
+      <label for="to">To</label> 
+      <select class="to" id="to">
+        <option value="USD">$</option>
+        <option value="UAH">&#8372;</option>
+        <option value="EUR">&#8364;</option>
+      </select>
+    </div>
+    <div class="sum">
+      <label for="sum">Sum</label>
+      <input type="text" id="sum">
+    </div>
+    <div class="result">
+      <button type="submit" id="calc">Result</button>
+      <input type="text" name="res" id="res">
+    </div>
+    </form>
     <script>
       'use strict';
-     const $boxes=document.querySelectorAll('.box');
-     const $boxes2=document.querySelectorAll('.box2');
-     const link='https://ithillel.ua/?utm_source=%D0%9A%D0%B0%D1%80%D0%BB%20%D1%83%20%D0%9A%D0%BB%D0%B0%D1%80%D1%8B%20%D1%83%D0%BA%D1%80%D0%B0%D0%BB%20%D0%BA%D0%BE%D1%80%D0%B0%D0%BB%D0%BB%D1%8B&utm_medium=,%20%D0%B0%20%D0%9A%D0%BB%D0%B0%D1%80%D0%B0%20%D1%83%20%D0%9A%D0%B0%D1%80%D0%BB%D0%B0%20%D1%83%D0%BA%D1%80%D0%B0%D0%BB%D0%B0%20%D0%BA%D0%BB%D0%B0%D1%80%D0%BD%D0%B5%D1%82.&utm_campaign=%D0%9A%D0%BE%D1%80%D0%BE%D0%BB%D0%B5%D0%B2%D0%B0%20%D0%9A%D0%BB%D0%B0%D1%80%D0%B0%20%D0%BA%D0%B0%D0%B2%D0%B0%D0%BB%D0%B5%D1%80%D0%B0&utm_term=%D0%9A%D0%B0%D1%80%D0%BB%D0%B0%20%D1%81%D1%82%D1%80%D0%BE%D0%B3%D0%BE%20%D0%BA%D0%B0%D1%80%D0%B0%D0%BB%D0%B0&utm_content=%D0%B7%D0%B0%20%D0%BA%D1%80%D0%B0%D0%B6%D1%83%20%D0%BA%D0%BE%D1%80%D0%B0%D0%BB%D0%BB%D0%BE%D0%B2';
-    
-     $boxes.forEach(function(box){
-             box.addEventListener('click', function(){
-                box.innerText=++box.innerText;            
-          });
-      });
-      $boxes2.forEach(function(box2){
-        box2.querySelector('.plus').addEventListener('click', function(){
-          this.closest('.box2').querySelector('.text_content').textContent++
-        });
-        box2.querySelector('.minus').addEventListener('click', function(){
-          this.closest('.box2').querySelector('.text_content').textContent--
-        });
-      });
-     
-     function makeObjFromQuery(link){
-      let arr=link.split('?');
-     let newArr=arr[1].split('&');
-     
-     function createArr(newArr){
-      let resultArr=[];
-      for(let i=0;i<=newArr.length - 1;i++){
-        resultArr[i]=newArr[i].split('=');
-      }
-       return resultArr;
-     }
-    let resultArr=createArr(newArr);   
-     
-    let finalValue=Object.fromEntries(resultArr);
+      const $key=document.querySelectorAll('td');
+      const textarea=document.querySelector('.content');
+      const $btn=document.querySelector('.clear');
 
-    for(let key in finalValue){
-      finalValue[key]=decodeURIComponent(finalValue[key]);
-    }
-        return finalValue;
-     }
-    let linkObject= makeObjFromQuery(link);
+        $key.forEach(function(td){
+        td.addEventListener('click',function(){
+          let text='';
+         text+=td.textContent;
+         textarea.textContent+= text;
+        })  
+      });
+      $btn.addEventListener('click', function(){
+        textarea.textContent='';
+      });
+   const keys='q,w,e,r,t,y,u,i,o,p,backspace,a,s,d,f,g,h,j,k,l,space,z,x,c,v,b,n,m,!,"'.split(',');
+   const table_wrap=document.querySelector('.table_wrap');
 
- function printData(obj){
-  let table='<table border="1" style="margin-left:20px; border-collapse:collapse;">';
-    for(let key in obj){
+     function createTable(arr){
+      let table ='<table border="1" style="border-collapse:collapse; margin-top:20px; margin-left:20px;">';
       let tr='<tr>';
-       tr+= `<td style="padding:5px;">${key}</td>`;
-        tr+=`<td style="padding:5px;">${obj[key]}</td>`;
-        tr+='</tr>'; 
+    keys.forEach(function(el,ind){
+       if (ind=== 10 || ind===20){
+         tr+=`</tr><tr><td class="js-table">${el}</td>`;
+       } else {
+         tr+=`<td class="js-table">${el}</td>`;
+       }
+     });
+     tr+='</tr>';
      table+=tr;
-     }      
-    table+='</table>'; 
-   const $div=document.createElement('div');
-    $div.innerHTML=`${table}`;
-     return document.body.append($div);
- }
- printData(linkObject);
+     table+='</table>';
+     return table;
+     }
+    
+     table_wrap.innerHTML= createTable(keys);
+      
+     document.querySelectorAll('.js-table').forEach(function(el){
+        el.addEventListener('click',function(){
+          let text='';
+         
+         if(this.textContent==='backspace') {
+          textarea.textContent=textarea.textContent.slice(0, -1);
+        } else if(this.textContent==='space'){
+          textarea.textContent=textarea.textContent + ' ';
+        } else {
+          text+=this.textContent;
+          textarea.textContent+= text;
+        }
+        });  
+     });
 
-const $container=document.querySelector('.container');
-const $enter_text=document.querySelector('.enter_text');
-    $enter_text.addEventListener('input',function(){
-      const $div=document.createElement('div');
-      $div.classList.add('letter');
-      $div.innerHTML=this.textContent[this.textContent.length-1];
-      $container.append($div);
-    })
+  const currency ={   
+     usd: {
+       selling:27.037,
+        buying:27.562
+       },
+     uah: {
+        selling:1,
+        buying:1
+      },
+    eur: {
+      selling:29.069,
+      buying:29.918
+      }
+    };
+ 
+  
+document.forms.exchange.addEventListener('submit', function(event){
+     event.preventDefault();
+  const operation =this.operation.value;
+    const currency_from=this.from.value;
+    const currency_to=this.to.value;
+    const sum=this.sum.value;
+    const res=this.res;
+   
+   if (operation==='selling'){
+      if(currency_from==='USD' && currency_to==='UAH') {
+        res.value=sum*currency.usd.selling;
+      }
+      if(currency_from==='UAH' && currency_to==='USD'){
+        res.value=sum/currency.usd.selling;
+      }
+      if(currency_from==='USD' && currency_to==='EUR'){
+       res.value=sum*(currency.usd.selling/currency.eur.selling);
+      } 
+      if(currency_from==='EUR' && currency_to==='USD') {
+        res.value=sum*(currency.eur.selling/currency.usd.selling);
+      }
+      if(currency_from==='EUR' && currency_to==='UAH') {
+        res.value=sum*currency.eur.selling;
+      }
+      if(currency_from==='UAH' && currency_to==='EUR') {
+        res.value=sum/currency.eur.selling;
+      }
+      if(currency_from===currency_to){
+        res.value=sum;
+      }
+    }
+    if (operation==='buying'){
+      if(currency_from==='USD' && currency_to==='UAH') {
+        res.value=sum*currency.usd.buying;
+      }
+      if(currency_from==='UAH' && currency_to==='USD'){
+        res.value=sum/currency.usd.buying;
+      }
+      if(currency_from==='USD' && currency_to==='EUR'){
+       res.value=sum*(currency.usd.buying/currency.eur.buying);
+      } 
+      if(currency_from==='EUR' && currency_to==='USD') {
+        res.value=sum*(currency.eur.buying/currency.usd.buying);
+      }
+      if(currency_from==='EUR' && currency_to==='UAH') {
+        res.value=sum*currency.eur.buying;
+      }
+      if(currency_from==='UAH' && currency_to==='EUR') {
+        res.value=sum/currency.eur.buying;
+      }
+      if(currency_from===currency_to){
+        res.value=sum;
+      }
+    }
+   });
     </script>
 </body>
 </html>
