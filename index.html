@@ -221,7 +221,8 @@ document.forms.exchange.addEventListener('submit', function(event){
     const currency_to=this.to.value;
     const sum=this.sum.value;
     const res=this.res;
-   
+   if (operation && currency_from && currency_to &&sum){
+   if (!isNaN(sum)) {  
    if (operation==='selling'){
       if(currency_from==='USD' && currency_to==='UAH') {
         res.value=sum*currency.usd.selling;
@@ -268,6 +269,12 @@ document.forms.exchange.addEventListener('submit', function(event){
         res.value=sum;
       }
     }
+   } else {
+     alert('Please, enter number not letters!');
+   }
+   } else {
+     alert('Please, fill all fields!');
+   }
    });
     </script>
 </body>
