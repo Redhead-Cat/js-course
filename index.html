@@ -4,278 +4,103 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Lesson13</title>
+    <title>Lesson15</title>
     <style>
- 
-    .content {
-        float:left;
-        width:400px;
-        min-height: 30px;
-        margin-bottom: 20px;
-        padding: 10px;
-        border: 1px solid yellowgreen;
-        border-radius: 10px;
-        background: rgba(154, 205, 50, 0.4);
-      }
-      .clear {
-        width: 70px;
-        height: 30px;
-        margin-left: 20px;
-        margin-top: 10px;
-        padding: 5px;
-        color:#fff;
-        border-radius: 5px;
-        border: none;
-        background: rgba(0,0,216,0.7);
-        box-shadow: 0 0 5px;
-        box-sizing: border-box;
-        text-transform: uppercase;
-      }
-      .clearfix {
-        clear: both;
-      }
-  .keybord {
-    order:1;
-    margin-left: 20px;
-    border-collapse: collapse;
-    box-shadow: 0 0 5px;
-  }
-    td {
-      padding: 10px;
+     .js-table {
+         margin:30px;
+         background: 	rgba(192,192,192,0.6);    
+     }
+     .js-td {
+       padding: 10px;
+     }
+    .accordeon {
+      width:400px;
+      margin:30px;
+      border-left:2px solid lightgrey;
+      border-right:2px solid lightgrey;
+      border-radius: 10px;
+      box-sizing: border-box;
+    }
+    .accordeon_header {
+      font-size: 22px;
+      color:dodgerblue;
+      margin:0 0 2px 0;
+      padding: 10px 30px;
+      border-top: 2px solid lightgrey;
+      border-bottom:2px solid lightgrey;
+      border-radius: 10px;
+      box-sizing: border-box;
       cursor: pointer;
     }
-    
-    form {
-      border: 1px solid;
-      margin: 30px;
-      width: 300px;
-      text-align: center;
+    .orange_color {
+      color:orange;
     }
-    .title {
-      font-weight: bold;
+    .accordeon_content {
+      display:none;
+      padding: 10px 20px;
+      background: lightgrey;
+      box-sizing: border-box;
     }
-    .select_operation,.select_currency,.sum,.result {
-      margin-bottom: 10px;
-    }
-.sum {
-  margin-left: 10px;
-}
+
     </style>
 </head>
 <body>
-    <h1>DOM, BOM + Events + Forms</h1>
- 
-    <div class="wrap">
-      <div class="content"></div>
-      <button class="clear" type="button">Clear</button>
-      <div class="clearfix"></div>
-      <table class="keybord" border="1">
-        <tr>
-          <td>!</td>
-          <td>"</td>
-          <td>&</td>
-          <td>*</td>
-          <td>(</td>
-          <td>)</td>
-          <td>-</td>
-          <td>+</td>
-          <td>/</td>
-          <td>?</td>
-          <td>q</td>
-          <td>w</td>
-        </tr>
-        <tr>
-          <td>e</td>
-          <td>r</td>
-          <td>t</td>
-          <td>y</td>
-          <td>u</td>
-          <td>i</td>
-          <td>o</td>
-          <td>p</td>
-          <td>a</td>
-          <td>s</td>
-          <td>d</td>
-          <td>f</td>
-        </tr>
-        <tr>
-          <td>g</td>
-          <td>h</td>
-          <td>j</td>
-          <td>k</td>
-          <td>l</td>
-          <td>z</td>
-          <td>x</td>
-          <td>c</td>
-          <td>v</td>
-          <td>b</td>
-          <td>n</td>
-          <td>m</td>
-        </tr>
-      </table>
+    <h1>Events delegation & jQuery</h1>
+    <div class="container"></div>
+    <div class="accordeon">
+      <h4 class="accordeon_header">Section 1</h4>
+      <div class="accordeon_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur laboriosam magni aperiam atque similique rerum? Suscipit ipsa animi eligendi vero quaerat maiores cumque, assumenda nihil dolor quasi et ut deserunt.</div>
+      <h4 class="accordeon_header">Section 2</h4>
+      <div class="accordeon_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur laboriosam magni aperiam atque similique rerum? Suscipit ipsa animi eligendi vero quaerat maiores cumque, assumenda nihil dolor quasi et ut deserunt.</div>
+      <h4 class="accordeon_header">Section 3</h4>
+      <div class="accordeon_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur laboriosam magni aperiam atque similique rerum? Suscipit ipsa animi eligendi vero quaerat maiores cumque, assumenda nihil dolor quasi et ut deserunt.</div>   
+      <h4 class="accordeon_header">Section 4</h4>
+      <div class="accordeon_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur laboriosam magni aperiam atque similique rerum? Suscipit ipsa animi eligendi vero quaerat maiores cumque, assumenda nihil dolor quasi et ut deserunt.</div>
     </div>
-    <div class="table_wrap"></div>
-   <form id="exchange" action="">
-      <p class="title">Exchange Currency</p>
-      <div class="select_operation">
-      <label for="selling">Selling</label>
-      <input id="selling" type="radio" name="operation" value="selling">
-      <label for="buying">Buying</label>
-      <input id="buying" type="radio" name="operation" value="buying">
-    </div>
-    <div class="select_currency">
-    <label for="from">From</label>
-      <select class="from" id="from">
-        <option value="USD">$</option>
-        <option value="UAH">&#8372;</option>
-        <option value="EUR">&#8364;</option>
-      </select>
-      <label for="to">To</label> 
-      <select class="to" id="to">
-        <option value="USD">$</option>
-        <option value="UAH">&#8372;</option>
-        <option value="EUR">&#8364;</option>
-      </select>
-    </div>
-    <div class="sum">
-      <label for="sum">Sum</label>
-      <input type="text" id="sum">
-    </div>
-    <div class="result">
-      <button type="submit" id="calc">Result</button>
-      <input type="text" name="res" id="res">
-    </div>
-    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
       'use strict';
-      const $key=document.querySelectorAll('td');
-      const textarea=document.querySelector('.content');
-      const $btn=document.querySelector('.clear');
+      const $container=document.querySelector('.container');
 
-        $key.forEach(function(td){
-        td.addEventListener('click',function(){
-          let text='';
-         text+=td.textContent;
-         textarea.textContent+= text;
-        })  
-      });
-      $btn.addEventListener('click', function(){
-        textarea.textContent='';
-      });
-   const keys='q,w,e,r,t,y,u,i,o,p,backspace,a,s,d,f,g,h,j,k,l,space,z,x,c,v,b,n,m,!,"'.split(',');
-   const table_wrap=document.querySelector('.table_wrap');
-
-     function createTable(arr){
-      let table ='<table border="1" style="border-collapse:collapse; margin-top:20px; margin-left:20px;">';
-      let tr='<tr>';
-    keys.forEach(function(el,ind){
-       if (ind=== 10 || ind===20){
-         tr+=`</tr><tr><td class="js-table">${el}</td>`;
-       } else {
-         tr+=`<td class="js-table">${el}</td>`;
-       }
-     });
-     tr+='</tr>';
-     table+=tr;
-     table+='</table>';
-     return table;
-     }
-    
-     table_wrap.innerHTML= createTable(keys);
-      
-     document.querySelectorAll('.js-table').forEach(function(el){
-        el.addEventListener('click',function(){
-          let text='';
-         
-         if(this.textContent==='backspace') {
-          textarea.textContent=textarea.textContent.slice(0, -1);
-        } else if(this.textContent==='space'){
-          textarea.textContent=textarea.textContent + ' ';
-        } else {
-          text+=this.textContent;
-          textarea.textContent+= text;
+      function createTable(rows,cols) {
+        let table = document.createElement('table');
+        table.border=2;
+        table.className='js-table';
+       for (let i = 0; i < rows; i++) {
+        let tr = document.createElement('tr');
+        table.append(tr);
+       for (let j = 0; j < cols; j++) {
+       let td = document.createElement('td');
+       td.className='js-td';
+        td.innerHTML = getRandomIntInclusive(1, 100);
+        tr.append(td);
+            }
         }
-        });  
-     });
+        return $container.append(table);  
+      }
+      function getRandomIntInclusive(min, max) {
+                       min = Math.ceil(min);
+                       max = Math.floor(max);
+                       return Math.floor(Math.random() * (max - min + 1)) + min; 
+                            };
+      createTable(3,3);
+      document.querySelector('table').
+      addEventListener('click', function(e){
+         const $el=e.target;
 
-  const currency ={   
-     usd: {
-       selling:27.037,
-        buying:27.562
-       },
-     uah: {
-        selling:1,
-        buying:1
-      },
-    eur: {
-      selling:29.069,
-      buying:29.918
-      }
-    };
- 
-  
-document.forms.exchange.addEventListener('submit', function(event){
-     event.preventDefault();
-  const operation =this.operation.value;
-    const currency_from=this.from.value;
-    const currency_to=this.to.value;
-    const sum=this.sum.value;
-    const res=this.res;
-   if (operation && currency_from && currency_to &&sum){
-   if (!isNaN(sum)) {  
-   if (operation==='selling'){
-      if(currency_from==='USD' && currency_to==='UAH') {
-        res.value=sum*currency.usd.selling;
-      }
-      if(currency_from==='UAH' && currency_to==='USD'){
-        res.value=sum/currency.usd.selling;
-      }
-      if(currency_from==='USD' && currency_to==='EUR'){
-       res.value=sum*(currency.usd.selling/currency.eur.selling);
-      } 
-      if(currency_from==='EUR' && currency_to==='USD') {
-        res.value=sum*(currency.eur.selling/currency.usd.selling);
-      }
-      if(currency_from==='EUR' && currency_to==='UAH') {
-        res.value=sum*currency.eur.selling;
-      }
-      if(currency_from==='UAH' && currency_to==='EUR') {
-        res.value=sum/currency.eur.selling;
-      }
-      if(currency_from===currency_to){
-        res.value=sum;
-      }
-    }
-    if (operation==='buying'){
-      if(currency_from==='USD' && currency_to==='UAH') {
-        res.value=sum*currency.usd.buying;
-      }
-      if(currency_from==='UAH' && currency_to==='USD'){
-        res.value=sum/currency.usd.buying;
-      }
-      if(currency_from==='USD' && currency_to==='EUR'){
-       res.value=sum*(currency.usd.buying/currency.eur.buying);
-      } 
-      if(currency_from==='EUR' && currency_to==='USD') {
-        res.value=sum*(currency.eur.buying/currency.usd.buying);
-      }
-      if(currency_from==='EUR' && currency_to==='UAH') {
-        res.value=sum*currency.eur.buying;
-      }
-      if(currency_from==='UAH' && currency_to==='EUR') {
-        res.value=sum/currency.eur.buying;
-      }
-      if(currency_from===currency_to){
-        res.value=sum;
-      }
-    }
-   } else {
-     alert('Please, enter number not letters!');
-   }
-   } else {
-     alert('Please, fill all fields!');
-   }
-   });
+         if($el.tagName==='TD'){
+           let num=`${$el.textContent} `;
+           $container.append(num);
+         }
+      });
+      $(document).ready(function() {
+      	$('.accordeon .accordeon_header').on('click', function(){
+          $(this).toggleClass('orange_color');
+          $('.accordeon .accordeon_content').not($(this).next()).slideUp(500);
+          $(this).next().slideToggle(1000);
+        });
+        });
+       
     </script>
 </body>
 </html>
