@@ -4,103 +4,116 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Lesson15</title>
+    <title>Lesson16</title>
     <style>
-     .js-table {
-         margin:30px;
-         background: 	rgba(192,192,192,0.6);    
-     }
-     .js-td {
-       padding: 10px;
-     }
-    .accordeon {
-      width:400px;
-      margin:30px;
-      border-left:2px solid lightgrey;
-      border-right:2px solid lightgrey;
-      border-radius: 10px;
-      box-sizing: border-box;
+     .wrap, .wrap2 {
+        width: 100%;
+        overflow: hidden;
+      }
+      .box, .box2{
+        float: left;
+        width:100px;
+        height: 100px;
+        margin-left:20px;
+        margin-bottom: 20px;
+        padding-top: 40px;
+        text-align: center;
+        border: 1px solid rgb(154, 205, 50);
+        background: rgba(154, 205, 50,0.8);
+        box-sizing: border-box;
+        cursor: pointer;
+      }
+      .box:last-child,.box2:last-child{
+        clear: right;
+        margin-right: 50px;
+      }
+    .text_content {
+      display: block;;
+      width: 100%;
+      text-align: center;
     }
-    .accordeon_header {
-      font-size: 22px;
-      color:dodgerblue;
-      margin:0 0 2px 0;
-      padding: 10px 30px;
-      border-top: 2px solid lightgrey;
-      border-bottom:2px solid lightgrey;
-      border-radius: 10px;
-      box-sizing: border-box;
-      cursor: pointer;
+    .plus,.minus {
+      margin-top: 10px;
     }
-    .orange_color {
-      color:orange;
-    }
-    .accordeon_content {
-      display:none;
-      padding: 10px 20px;
-      background: lightgrey;
-      box-sizing: border-box;
-    }
-
+    .box2 {   
+      background: #000;
+      }
+      .box2:last-child {
+        margin-bottom: 0;
+      }
+     .bg-green {
+        background: green;
+      }
+      .bg-blue {
+        background: blue;
+      }
+      .bg-yellow {
+        background: yellow;
+      }
     </style>
 </head>
 <body>
-    <h1>Events delegation & jQuery</h1>
-    <div class="container"></div>
-    <div class="accordeon">
-      <h4 class="accordeon_header">Section 1</h4>
-      <div class="accordeon_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur laboriosam magni aperiam atque similique rerum? Suscipit ipsa animi eligendi vero quaerat maiores cumque, assumenda nihil dolor quasi et ut deserunt.</div>
-      <h4 class="accordeon_header">Section 2</h4>
-      <div class="accordeon_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur laboriosam magni aperiam atque similique rerum? Suscipit ipsa animi eligendi vero quaerat maiores cumque, assumenda nihil dolor quasi et ut deserunt.</div>
-      <h4 class="accordeon_header">Section 3</h4>
-      <div class="accordeon_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur laboriosam magni aperiam atque similique rerum? Suscipit ipsa animi eligendi vero quaerat maiores cumque, assumenda nihil dolor quasi et ut deserunt.</div>   
-      <h4 class="accordeon_header">Section 4</h4>
-      <div class="accordeon_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur laboriosam magni aperiam atque similique rerum? Suscipit ipsa animi eligendi vero quaerat maiores cumque, assumenda nihil dolor quasi et ut deserunt.</div>
-    </div>
+  <h1>jQuery part 2</h1>
+  <div class="wrap">
+  <div class="box">
+    <span>0</span>
+    <button type="button" data-action="minus">-</button>
+    <button type="button" data-action="plus">+</button>
+  </div>
+  <div class="box">
+    <span>0</span>
+    <button type="button" data-action="minus">-</button>
+    <button type="button" data-action="plus">+</button>
+  </div>
+  <div class="box">
+    <span>0</span>
+    <button type="button" data-action="minus">-</button>
+    <button type="button" data-action="plus">+</button>
+  </div>
+  <div class="box">
+    <span>0</span>
+    <button type="button" data-action="minus">-</button>
+    <button type="button" data-action="plus">+</button>
+  </div>
+</div>
+  <div class="wrap2">
+        <div class="box2"></div>
+        <div class="box2"></div>
+        <div class="box2"></div>
+        <div class="box2"></div>
+  </div>      
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
       'use strict';
-      const $container=document.querySelector('.container');
-
-      function createTable(rows,cols) {
-        let table = document.createElement('table');
-        table.border=2;
-        table.className='js-table';
-       for (let i = 0; i < rows; i++) {
-        let tr = document.createElement('tr');
-        table.append(tr);
-       for (let j = 0; j < cols; j++) {
-       let td = document.createElement('td');
-       td.className='js-td';
-        td.innerHTML = getRandomIntInclusive(1, 100);
-        tr.append(td);
-            }
-        }
-        return $container.append(table);  
-      }
-      function getRandomIntInclusive(min, max) {
-                       min = Math.ceil(min);
-                       max = Math.floor(max);
-                       return Math.floor(Math.random() * (max - min + 1)) + min; 
-                            };
-      createTable(3,3);
-      document.querySelector('table').
-      addEventListener('click', function(e){
-         const $el=e.target;
-
-         if($el.tagName==='TD'){
-           let num=`${$el.textContent} `;
-           $container.append(num);
-         }
-      });
       $(document).ready(function() {
-      	$('.accordeon .accordeon_header').on('click', function(){
-          $(this).toggleClass('orange_color');
-          $('.accordeon .accordeon_content').not($(this).next()).slideUp(500);
-          $(this).next().slideToggle(1000);
+        let count;
+      	$('[data-action="minus"]').on('click', function(){
+          count=+$(this).prev('.box span').text() - 1;
+          $(this).prev('.box span').text(count--);
+        });
+        $('[data-action="plus"]').on('click', function(){
+          count=+$(this).prev('[data-action="minus"]').prev('.box span').text() + 1;
+          $(this).prev('[data-action="minus"]').prev('.box span').text(count++);
         });
         });
-       
+
+       $(document).ready(function(){
+          $('.box2').on('click', function(){
+            let newClass=this.className;
+            $(this).each(function(){
+            switch(newClass){
+          case 'box2': $(this).addClass('bg-green');
+          break;
+          case 'box2 bg-green':$(this).addClass('bg-blue');
+          break;
+          case 'box2 bg-green bg-blue':$(this).addClass('bg-yellow');
+          break;
+          default: this.className='box2';
+            }
+            $(this).appendTo('.wrap2');
+        });
+            });
+        });
     </script>
 </body>
 </html>
