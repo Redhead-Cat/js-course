@@ -4,116 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Lesson16</title>
-    <style>
-     .wrap, .wrap2 {
-        width: 100%;
-        overflow: hidden;
-      }
-      .box, .box2{
-        float: left;
-        width:100px;
-        height: 100px;
-        margin-left:20px;
-        margin-bottom: 20px;
-        padding-top: 40px;
-        text-align: center;
-        border: 1px solid rgb(154, 205, 50);
-        background: rgba(154, 205, 50,0.8);
-        box-sizing: border-box;
-        cursor: pointer;
-      }
-      .box:last-child,.box2:last-child{
-        clear: right;
-        margin-right: 50px;
-      }
-    .text_content {
-      display: block;;
-      width: 100%;
-      text-align: center;
-    }
-    .plus,.minus {
-      margin-top: 10px;
-    }
-    .box2 {   
-      background: #000;
-      }
-      .box2:last-child {
-        margin-bottom: 0;
-      }
-     .bg-green {
-        background: green;
-      }
-      .bg-blue {
-        background: blue;
-      }
-      .bg-yellow {
-        background: yellow;
-      }
-    </style>
+    <title>Lesson18</title>
 </head>
 <body>
-  <h1>jQuery part 2</h1>
-  <div class="wrap">
-  <div class="box">
-    <span>0</span>
-    <button type="button" data-action="minus">-</button>
-    <button type="button" data-action="plus">+</button>
-  </div>
-  <div class="box">
-    <span>0</span>
-    <button type="button" data-action="minus">-</button>
-    <button type="button" data-action="plus">+</button>
-  </div>
-  <div class="box">
-    <span>0</span>
-    <button type="button" data-action="minus">-</button>
-    <button type="button" data-action="plus">+</button>
-  </div>
-  <div class="box">
-    <span>0</span>
-    <button type="button" data-action="minus">-</button>
-    <button type="button" data-action="plus">+</button>
-  </div>
-</div>
-  <div class="wrap2">
-        <div class="box2"></div>
-        <div class="box2"></div>
-        <div class="box2"></div>
-        <div class="box2"></div>
-  </div>      
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <h1>this</h1>
     <script>
       'use strict';
-      $(document).ready(function() {
-        let count;
-      	$('[data-action="minus"]').on('click', function(){
-          count=+$(this).prev('.box span').text() - 1;
-          $(this).prev('.box span').text(count--);
-        });
-        $('[data-action="plus"]').on('click', function(){
-          count=+$(this).prev('[data-action="minus"]').prev('.box span').text() + 1;
-          $(this).prev('[data-action="minus"]').prev('.box span').text(count++);
-        });
-        });
+     const array=[1,10,25,34,42];
+     const admin={
+       name:'Alex'
+     };
+     const user={
+       name:'Nick'
+     };
+    
+     function myBind(fn,context,...boundArgs){
+       return function(...args){
+         return fn.apply(context, [...boundArgs, ...args]);
+       }
+     };
+   
+     function createMessage(word,symbol){
+       console.log(`${word} ${this.name} ${symbol}`);
+    } ;
+     
+    const adminBound=myBind(createMessage,admin);
+     const userBound=myBind(createMessage,user);
 
-       $(document).ready(function(){
-          $('.box2').on('click', function(){
-            let newClass=this.className;
-            $(this).each(function(){
-            switch(newClass){
-          case 'box2': $(this).addClass('bg-green');
-          break;
-          case 'box2 bg-green':$(this).addClass('bg-blue');
-          break;
-          case 'box2 bg-green bg-blue':$(this).addClass('bg-yellow');
-          break;
-          default: this.className='box2';
-            }
-            $(this).appendTo('.wrap2');
-        });
-            });
-        });
+     console.log(adminBound('Hello','!!!'));
+     console.log(userBound('Hi','!'));
+
+
+    function myMap(arr, callback, thisArg) {
+
+       let result = [];
+
+       for (let i = 0; i <= arr.length - 1; i++) {
+
+         result.push(callback.call(thisArg,arr[i], i, arr));
+
+       }
+       return result;
+      }
+
+      function cb(el){
+          return el*10;
+      }
+
+    let newArray=myMap(array,cb);
+
+  console.log(array);
+  console.log(newArray);
+  
     </script>
 </body>
 </html>
