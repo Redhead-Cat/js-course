@@ -17,23 +17,32 @@
      const user={
        name:'Nick'
      };
-    
-     function myBind(fn,context,...boundArgs){
-       return function(...args){
-         return fn.apply(context, [...boundArgs, ...args]);
-       }
-     };
-   
-     function createMessage(word,symbol){
-       console.log(`${word} ${this.name} ${symbol}`);
-    } ;
      
-    const adminBound=myBind(createMessage,admin);
-     const userBound=myBind(createMessage,user);
+    
+     const myBind = function(fn, context) {
 
-     console.log(adminBound('Hello','!!!'));
-     console.log(userBound('Hi','!'));
+      const bindArgs = Array.prototype.slice.call(arguments, 2);
+       
+      return function() {
+  
+      const fnArgs = Array.prototype.slice.call(arguments);
 
+     return fn.apply(context, bindArgs.concat(fnArgs));
+       }
+      };
+
+     function createMessage(word,symbol){
+      return `${word} ${this.name} ${symbol}`;
+    } ;
+
+   
+     const res=myBind(createMessage,admin,'Hello');
+     const res2=myBind(createMessage,user,'Hi','!');
+
+     console.log(res('!!!'));
+     console.log(res2());
+     
+    
 
     function myMap(arr, callback, thisArg) {
 
