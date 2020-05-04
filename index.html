@@ -8,63 +8,73 @@
 </head>
 <body>
   <h1>this</h1>
+  <button type="button" class="fb">FB Like</button>
+  <button type="button" class="vk">VK Like</button>
+  <button type="button" class="reset_fb">Reset FB</button>
+  <button type="button" class="reset_vk">Reset VK</button>
     <script>
       'use strict';
-     const array=[1,10,25,34,42];
-     const admin={
-       name:'Alex'
-     };
-     const user={
-       name:'Nick'
-     };
-     
-    
-     const myBind = function(fn, context) {
 
-      const bindArgs = Array.prototype.slice.call(arguments, 2);
-       
-      return function() {
-  
-      const fnArgs = Array.prototype.slice.call(arguments);
+    function sum(){
+      let res=0;
+      return function(number){
+        return res+=number;
+      }
+    }
 
-     return fn.apply(context, bindArgs.concat(fnArgs));
-       }
+    const sumResult=sum();
+
+    console.log(sumResult(5));
+    console.log(sumResult(10));
+    console.log(sumResult(15));
+
+    function createCounter(startValue,step){
+      let count=startValue;
+      function counter(){
+        return count+=step;
       };
+      counter.reset= function(){
+        count=startValue;
+        return count;
+      }
+      return counter;
+    };
 
-     function createMessage(word,symbol){
-      return `${word} ${this.name} ${symbol}`;
-    } ;
+     const fbCounter=createCounter(2,1);
+     const vkCounter=createCounter(5,2);
+     const fbBtn= document.querySelector('.fb');
+     const vkBtn= document.querySelector('.vk');
+     const resetFbBtn= document.querySelector('.reset_fb');
+     const resetVkBtn= document.querySelector('.reset_vk');
 
-   
-     const res=myBind(createMessage,admin,'Hello');
-     const res2=myBind(createMessage,user,'Hi','!');
-
-     console.log(res('!!!'));
-     console.log(res2());
+     fbBtn.addEventListener('click',function(){
+       console.log(fbCounter(),'FB counter');
+     });
+     vkBtn.addEventListener('click',function(){
+       console.log(vkCounter(),'VK counter');
+     });
+     resetFbBtn.addEventListener('click',function(){
+       console.log(fbCounter.reset(),'FB counter start value');
+     });
+     resetVkBtn.addEventListener('click',function(){
+      console.log(vkCounter.reset(),'VK counter start value');
+     });
      
+
+    function palindrome(num){
+      num=num+'';
+      let newNum=num.split("").reverse().join("");
+
+       if (num===newNum){
+        return num;
+       } 
+      return palindrome(+num + +newNum,num);
+     }
     
+    console.log(palindrome(24));
+    console.log(palindrome(121));
+    console.log(palindrome(96));
 
-    function myMap(arr, callback, thisArg) {
-
-       let result = [];
-
-       for (let i = 0; i <= arr.length - 1; i++) {
-
-         result.push(callback.call(thisArg,arr[i], i, arr));
-
-       }
-       return result;
-      }
-
-      function cb(el){
-          return el*10;
-      }
-
-    let newArray=myMap(array,cb);
-
-  console.log(array);
-  console.log(newArray);
-  
     </script>
 </body>
 </html>
