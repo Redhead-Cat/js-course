@@ -7,73 +7,50 @@
     <title>Lesson18</title>
 </head>
 <body>
-  <h1>this</h1>
-  <button type="button" class="fb">FB Like</button>
-  <button type="button" class="vk">VK Like</button>
-  <button type="button" class="reset_fb">Reset FB</button>
-  <button type="button" class="reset_vk">Reset VK</button>
     <script>
       'use strict';
-
-    function sum(){
-      let res=0;
-      return function(number){
-        return res+=number;
-      }
+ function FizzBuzz(n) {
+  if(Number.isInteger(n)){
+    for (let x = 1; x <= n; x++) {
+  switch (true) {
+    case (x % 5 === 0 && x % 3 === 0):
+        console.log("FizzBuzz");
+        break;
+    case x % 3 === 0:
+        console.log("Fizz");
+        break;
+    case x % 5 === 0:
+        console.log("Buzz");
+        break;
+    default:
+        console.log(x);
+        break;
     }
+   }
+  } else {
+    console.log('Error!Enter an integer number!');
+  }
+}
+  FizzBuzz(15);
+  FizzBuzz(2.5);
 
-    const sumResult=sum();
+  function getVowels(str) {
+    let vowels = 'aeiou';
+     let res= str.toLowerCase().split('')
+        .reduce((acc, cur) => vowels.includes(cur) ? acc += cur : acc, '');
+     return res.length;   
+       }
+       console.log('Vowels: ' + getVowels('For whom the bell tolls'));
 
-    console.log(sumResult(5));
-    console.log(sumResult(10));
-    console.log(sumResult(15));
-
-    function createCounter(startValue,step){
-      let count=startValue;
-      function counter(){
-        return count+=step;
-      };
-      counter.reset= function(){
-        count=startValue;
-        return count;
-      }
-      return counter;
-    };
-
-     const fbCounter=createCounter(2,1);
-     const vkCounter=createCounter(5,2);
-     const fbBtn= document.querySelector('.fb');
-     const vkBtn= document.querySelector('.vk');
-     const resetFbBtn= document.querySelector('.reset_fb');
-     const resetVkBtn= document.querySelector('.reset_vk');
-
-     fbBtn.addEventListener('click',function(){
-       console.log(fbCounter(),'FB counter');
-     });
-     vkBtn.addEventListener('click',function(){
-       console.log(vkCounter(),'VK counter');
-     });
-     resetFbBtn.addEventListener('click',function(){
-       console.log(fbCounter.reset(),'FB counter start value');
-     });
-     resetVkBtn.addEventListener('click',function(){
-      console.log(vkCounter.reset(),'VK counter start value');
-     });
-     
-
-    function palindrome(num){
-      num=num+'';
-      let newNum=num.split("").reverse().join("");
-
-       if (num===newNum){
-        return num;
-       } 
-      return palindrome(+num + +newNum,num);
-     }
-    
-    console.log(palindrome(24));
-    console.log(palindrome(121));
-    console.log(palindrome(96));
+function fib(n){
+  if(n<=1){
+    return n;
+  } else {
+    return (fib(n - 1) + fib(n - 2));
+  }
+}
+console.log(fib(7));
+console.log(fib(16));
 
     </script>
 </body>
