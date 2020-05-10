@@ -52,6 +52,22 @@ function fib(n){
 console.log(fib(7));
 console.log(fib(16));
 
+//clear function
+function fib2 (n){
+  if(n === 0){
+    return [0, 1];
+  }else{
+    const [prev, next] = fib2(n - 1);
+    return [next, prev + next];
+  }
+}
+
+function fib3(n){
+  return fib2(n)[0];
+}
+console.log(fib3(7));
+console.log(fib3(16));
+
     </script>
 </body>
 </html>
