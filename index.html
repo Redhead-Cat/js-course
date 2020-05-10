@@ -25,9 +25,8 @@
            const li=document.createElement('li');
            li.innerHTML=film.title;
            list.append(li);
-          
-          li.addEventListener('click',function(){
-             const subList=document.createElement('ul');
+           const subList=document.createElement('ul');
+           subList.style.cssText="display:none"; 
              film.starships.forEach(function(starships){
               const subLi=document.createElement('li');
                               fetch(starships)
@@ -39,11 +38,15 @@
                               })  
               subList.append(subLi);
               li.append(subList);
+
+              li.addEventListener('click',function(){
+          return  subList.style.cssText="display:block"; 
+       })
+
              }) 
            });
          })
-       })
-
+          
 
 
     </script>
