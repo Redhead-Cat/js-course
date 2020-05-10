@@ -4,69 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Lesson18</title>
+    <title>Lesson21</title>
 </head>
 <body>
+  <ul class="list"></ul>
     <script>
       'use strict';
- function FizzBuzz(n) {
-  if(Number.isInteger(n)){
-    for (let x = 1; x <= n; x++) {
-  switch (true) {
-    case (x % 5 === 0 && x % 3 === 0):
-        console.log("FizzBuzz");
-        break;
-    case x % 3 === 0:
-        console.log("Fizz");
-        break;
-    case x % 5 === 0:
-        console.log("Buzz");
-        break;
-    default:
-        console.log(x);
-        break;
-    }
-   }
-  } else {
-    console.log('Error!Enter an integer number!');
-  }
-}
-  FizzBuzz(15);
-  FizzBuzz(2.5);
-
-  function getVowels(str) {
-    let vowels = 'aeiou';
-     let res= str.toLowerCase().split('')
-        .reduce((acc, cur) => vowels.includes(cur) ? acc += cur : acc, '');
-     return res.length;   
+       function getSWFilms(){
+         return fetch('https://swapi.dev/api/films/');
        }
-       console.log('Vowels: ' + getVowels('For whom the bell tolls'));
 
-function fib(n){
-  if(n<=1){
-    return n;
-  } else {
-    return (fib(n - 1) + fib(n - 2));
-  }
-}
-console.log(fib(7));
-console.log(fib(16));
+       getSWFilms() 
+       .then(function(response){
+         return response.json();
+       })
+       .then(function(data){
+         const list=document.querySelector('.list');
 
-//clear function
-function fib2 (n){
-  if(n === 0){
-    return [0, 1];
-  }else{
-    const [prev, next] = fib2(n - 1);
-    return [next, prev + next];
-  }
-}
+         data.results.forEach(function(film){
+           const li=document.createElement('li');
+           li.innerHTML=film.title;
+           list.append(li);
+          
+          li.addEventListener('click',function(){
+             const subList=document.createElement('ul');
+             film.starships.forEach(function(starships){
+              const subLi=document.createElement('li');
+                              fetch(starships)
+                              .then(function(response){
+                                  return response.json();
+                                })
+                              .then(function(data){
+                                return subLi.innerHTML=data.name
+                              })  
+              subList.append(subLi);
+              li.append(subList);
+             }) 
+           });
+         })
+       })
 
-function fib3(n){
-  return fib2(n)[0];
-}
-console.log(fib3(7));
-console.log(fib3(16));
+
 
     </script>
 </body>
