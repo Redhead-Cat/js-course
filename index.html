@@ -4,131 +4,111 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Lesson23</title>
+    <title>Lesson25</title>
+    <style>
+      .case, .case_btn, .toDoList{
+        margin:10px 15px;
+        padding:5px 10px; 
+      }
+      .wrap {
+      display: flex; 
+      justify-content:space-between;
+      }
+      .toDoList {
+        width:300px;
+        min-height: 150px;
+        border: 1px solid;
+      }
+      .toDO_item {
+        line-height:2.5;
+      }
+      .toDO_item_done {
+        text-decoration:line-through;
+      }
+      .done_btn, .delete_btn {
+        margin:10px 5px;
+        padding:5px 10px
+      }
+      .done_btn {
+        background: green;
+        border: none;
+      }
+      .delete_btn {
+        background: red;
+        border: none;
+      }
+
+    </style>
 </head>
+<form>
+  <input class="case" name="case" type="text" placeholder="Add case">
+  <button class="case_btn" type="submit">ADD</button><br>
+</form>
+<div class="toDoList"></div>
 <body>
     <script>
       'use strict';
-      function Student(firstName,lastName,year,marks){
-             this.firstName=firstName;
-             this.lastName=lastName;
-             this.year=year;
-             this.marks=marks;
-             this.attendance = new Array(25).fill(0);
-      }
-      Student.prototype={
-        studentAge:function(){
-               let today=new Date();
-               let currentYear=today.getFullYear();
-               let age= currentYear - this.year;
-               return age
-             },
-        studentInfo:function(){
-          return `Student name:${this.firstName}\nStudent Last name:${this.lastName}\nStudent Age:${this.studentAge()}\nStudent marks:${this.marks}`
-        },
-        average:function(){
-        let sum=this.marks.reduce(function(a,b){
-            return a+b;
-          });
-        let res=Math.round(sum/this.marks.length);
-        return res; 
-        },
-       present:function(){ 
-         if (this.attendance.indexOf(0)!=-1){
-          this.attendance[this.attendance.indexOf(0)]=true;
-         return this.attendance;
-        } 
-         }   
-        ,
-        absent:function(){ 
-        if (this.attendance.indexOf(0)!=-1){
-         this.attendance[this.attendance.indexOf(0)]=false;
-         return this.attendance;
-        }
-       } ,
-       summary:function(){
-         let count=0;
-         for(let i=0;i<=this.attendance.length;i++){
-           if(this.attendance[i]===true){
-            ++count;
-           }
-         }
-         let attendanceAverage=count/this.attendance.length;
-        if (attendanceAverage>0.9 && this.average()>90){
-          return 'Ути какой молодчинка!';
-        } else if(attendanceAverage>0.9 || this.average()>90){
-          return 'Норм, но можно лучше';
-        } else {
-          return 'Редиска!';
-        }
-       },
-        constructor:Student
+     if (localStorage.storageCases){
+      printToDoList(JSON.parse(localStorage.storageCases));
+     }
+     
+     document.forms[0].addEventListener ('submit',(e)=>{
+
+       e.preventDefault();
+       const cases=localStorage.storageCases ? JSON.parse(localStorage.storageCases) : [];
+       const item = e.target.elements.case.value;
+       const toDOItem={
+         id:Date.now(),
+         value:item,
+         done:false
+       }
+       cases.push(toDOItem);
+       localStorage.storageCases=JSON.stringify(cases);
+       printToDoList(cases);
+     })
+      function printToDoList(cases){
+        let casesStr='';
+        cases.forEach(toDOItem => {
+           casesStr+=`<div class="wrap">
+                     <div class="toDO_item"><span>${toDOItem.value}</span></div>
+                     <div>
+                     <button id="${toDOItem.id}" type="submit" class="done_btn" data-action="done">+</button>
+                     <button id="${toDOItem.id}" type="reset" class="delete_btn" data-action="delete">-</button>
+                     </div>
+                     </div>`               
+        });  
+        document.querySelector('.toDoList').innerHTML=casesStr;
       }
 
-      const student1=new Student('Alex','Pushkin',1987,[85,75,90,85,100,80,95,100,95,85,100,100]);
-      const student2=new Student('Oleg','Sidorov',1997,[85,75,90,85,80,80,95,100,95,65,100,90]);
-      console.log(student1);
-      console.log(student1.studentInfo());
-      console.log(student1.average());
-      console.log(student1.present());
-      console.log(student1.present());
-      console.log(student1.present());
-      console.log(student1.present());
-      console.log(student1.present());
-      console.log(student1.present());
-      console.log(student1.present());
-      console.log(student1.present());
-      console.log(student1.present());
-      console.log(student1.present());
-      console.log(student1.present());
-      console.log(student1.present());
-      console.log(student1.present());
-      console.log(student1.present());
-      console.log(student1.present());
-      console.log(student1.present());
-      console.log(student1.present());
-      console.log(student1.present());
-      console.log(student1.present());
-      console.log(student1.present());
-      console.log(student1.present());
-      console.log(student1.present());
-      console.log(student1.present());
-      console.log(student1.present());
-      console.log(student1.present());
-      console.log(student1.present());//26 element
-      console.log(student1.present());//27 element
-      console.log(student1.present());//28 element
-      console.log(student1.summary());
-      console.log(student2);
-      console.log(student2.studentInfo());
-      console.log(student2.average());
-      console.log(student2.present());
-      console.log(student2.absent());
-      console.log(student2.present());
-      console.log(student2.present());
-      console.log(student2.absent());
-      console.log(student2.present());
-      console.log(student2.absent());
-      console.log(student2.present());
-      console.log(student2.absent());
-      console.log(student2.present());
-      console.log(student2.present());
-      console.log(student2.absent());
-      console.log(student2.present());
-      console.log(student2.absent());
-      console.log(student2.present());
-      console.log(student2.absent());
-      console.log(student2.present());
-      console.log(student2.present());
-      console.log(student2.absent());
-      console.log(student2.present());
-      console.log(student2.present());
-      console.log(student2.present());
-      console.log(student2.present());
-      console.log(student2.absent());
-      console.log(student2.present());
-      console.log(student2.present());//26 element
-      console.log(student2.summary());
+      const toDoList=document.querySelector('.toDoList');
+
+      toDoList.addEventListener('click',(e)=>{
+        const caseItem=JSON.parse(localStorage.storageCases);
+        caseItem.forEach((el,i)=>{
+          if(el.id=== +e.target.id){
+            if(e.target.dataset.action==='done'){
+              if(el.done){
+                el.done=false;
+                e.target.closest('.wrap')
+               .querySelector('.toDO_item > span')
+               .classList
+               .remove('toDO_item_done');
+              } else {
+                el.done=true;
+                e.target.closest('.wrap')
+               .querySelector('.toDO_item > span')
+               .classList
+               .add('toDO_item_done');
+              }
+            } else if(e.target.dataset.action==='delete'){
+              caseItem.splice(i,1);
+              printToDoList(caseItem);
+            }
+          } 
+        })
+        localStorage.storageCases=JSON.stringify(caseItem);
+      });
+      
       </script>
 </body>
 </html>
