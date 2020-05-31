@@ -93,19 +93,16 @@
         const caseItem=JSON.parse(localStorage.storedCases);
         caseItem.forEach((el,i)=>{
           if(el.id=== +e.target.id){
+            e.target.closest('.wrap')
+               .querySelector('.toDO_item > span')
+               .classList
+               .toggle('toDO_item_done');
             if(e.target.dataset.action==='done'){
               if(el.done){
                 el.done=false;
-                e.target.closest('.wrap')
-               .querySelector('.toDO_item > span')
-               .classList
-               .remove('toDO_item_done');
+                
               } else {
                 el.done=true;
-               e.target.closest('.wrap')
-               .querySelector('.toDO_item > span')
-               .classList
-               .add('toDO_item_done');
               }
             } else if(e.target.dataset.action==='delete'){
               caseItem.splice(i,1);
