@@ -48,14 +48,14 @@
 <body>
     <script>
       'use strict';
-     if (localStorage.storageCases){
-      printToDoList(JSON.parse(localStorage.storageCases));
+     if (localStorage.storedCases){
+      printToDoList(JSON.parse(localStorage.storedCases));
      }
      
      document.forms[0].addEventListener ('submit',(e)=>{
 
        e.preventDefault();
-       const cases=localStorage.storageCases ? JSON.parse(localStorage.storageCases) : [];
+       const cases=localStorage.storedCases ? JSON.parse(localStorage.storedCases) : [];
        const item = e.target.elements.case.value;
        const toDOItem={
          id:Date.now(),
@@ -63,16 +63,23 @@
          done:false
        }
        cases.push(toDOItem);
-       localStorage.storageCases=JSON.stringify(cases);
+       localStorage.storedCases=JSON.stringify(cases);
        printToDoList(cases);
-     })
+       
+     });
       function printToDoList(cases){
         let casesStr='';
         cases.forEach(toDOItem => {
-           casesStr+=`<div class="wrap">
-                     <div class="toDO_item"><span>${toDOItem.value}</span></div>
-                     <div>
-                     <button id="${toDOItem.id}" type="submit" class="done_btn" data-action="done">+</button>
+           casesStr+=`<div class="wrap">`;
+          casesStr+=`<div class="toDO_item">`;
+            if (toDOItem.done===true){
+              casesStr+=`<span class="toDO_item_done">${toDOItem.value}</span></div>
+                     <div>`
+            } else {
+              casesStr+=`<span>${toDOItem.value}</span></div>
+                     <div>`
+            }   
+            casesStr+=`<button id="${toDOItem.id}" type="submit" class="done_btn" data-action="done">+</button>
                      <button id="${toDOItem.id}" type="reset" class="delete_btn" data-action="delete">-</button>
                      </div>
                      </div>`               
@@ -83,7 +90,7 @@
       const toDoList=document.querySelector('.toDoList');
 
       toDoList.addEventListener('click',(e)=>{
-        const caseItem=JSON.parse(localStorage.storageCases);
+        const caseItem=JSON.parse(localStorage.storedCases);
         caseItem.forEach((el,i)=>{
           if(el.id=== +e.target.id){
             if(e.target.dataset.action==='done'){
@@ -95,7 +102,7 @@
                .remove('toDO_item_done');
               } else {
                 el.done=true;
-                e.target.closest('.wrap')
+               e.target.closest('.wrap')
                .querySelector('.toDO_item > span')
                .classList
                .add('toDO_item_done');
@@ -106,7 +113,7 @@
             }
           } 
         })
-        localStorage.storageCases=JSON.stringify(caseItem);
+        localStorage.storedCases=JSON.stringify(caseItem);
       });
       
       </script>
