@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lesson14</title>
+    <style>
+        #canvas{
+            display: block;
+            border:1px solid;
+            background: rgba(58,117,196,0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Canvas & Three.js</h1>
+    <canvas id="canvas" width="400" height="300"></canvas>
+    <div id="threejs"></div>
+    <script src="three.js"></script>
+    <script>
+         'use strict';
+         const canvas = document.getElementById('canvas');
+         const ctx = canvas.getContext('2d'); 
+         const circle = function (x, y, radius) {
+              ctx.beginPath();
+              ctx.arc(x, y, radius, 0, 2 * Math.PI, false);
+              ctx.fill(); 
+            };
+         
+            function snowman (x, y) {
+              ctx.fillStyle = "#E6E6FA";
+         
+              circle(x + 50, y + 130, 40);
+              circle(x + 50, y + 60, 30);
+              circle(x + 50, y + 5, 25);
+
+              ctx.fillStyle = "#000000";
+              circle(x + 40, y + 5, 5);
+              circle(x + 60, y + 5, 5);
+         
+              circle(x + 50, y + 50, 5);
+              circle(x + 50, y + 70, 5);
+
+              circle(x + 50, y + 110, 5);
+              circle(x + 50, y + 130, 5);
+              circle(x + 50, y + 150, 5);
+         
+              ctx.fillStyle = "Orange";
+              circle(x + 50, y + 15, 5);
+            };
+         
+            snowman(150, 50);
+
+            const winW = 402;
+            const winH = 300;
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(50, winW / winH, 0.01, 10);
+
+            const renderer = new THREE.WebGLRenderer({antialias: true});
+            renderer.setSize(winW, winH);
+            document.body.appendChild(renderer.domElement);
+
+            const radius = 4;
+            const height = 5;
+
+
+            const geometry = new THREE.CylinderGeometry(0, radius, height, 4, 1)
+            const material = new THREE.MeshNormalMaterial();
+            const pyramid = new THREE.Mesh(geometry, material);
+            scene.add(pyramid);
+
+
+            camera.position.z = 10;
+
+            function render() {
+                requestAnimationFrame(render);
+                pyramid.rotation.x += 0.00;
+                pyramid.rotation.y += 0.01;
+
+                renderer.render(scene, camera);
+            };
+
+            render();
+
+    </script>
+</body>
+</html>
