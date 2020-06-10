@@ -3,7 +3,9 @@ const fs=require('fs');
 const browserSync=require('browser-sync');
 const less=require('gulp-less');
 const autoprefixer= require('gulp-autoprefixer');
-const babel = require("@babel/core");
+const babel = require('gulp-babel');
+const del=require('del');
+const babelPreset=require('@babel/preset-env');
 function server(){
   browserSync({
     server:{
@@ -13,7 +15,7 @@ function server(){
   });
 }
 function files(){
-  return src(['./src/index.html','./build/js/main.js'])
+  return src(['./src/index.html','./src/**/*.js'])
          .pipe(dest('./dist/'));
 }
 function css(){
@@ -25,22 +27,18 @@ function css(){
          .pipe(browserSync.reload({stream:true}));
 }
 
-//function jsBuild(){
-//   return src('./build/**/*.js')
- //         .pipe(dest('./dist'))
- //         .pipe(browserSync.reload({stream:true}));
-//}
-function clean(cb){
-  if(fs.existsSync('./dist')){
-    const files=fs.readdirSync('./dist');
+function jsBuild(){
+   return src('./src/**/*.js')
+          .pipe(babel({
+           presets: ['@babel/preset-env']
+          }))
+          .pipe(dest('./dist'))
+          .pipe(browserSync.reload({stream:true}));
+}
 
-    files.forEach(f=>{
-      fs.unlinkSync(`./dist/${f}`);
-    });
-    fs.rmdirSync('./dist');
-  }
-  cb();
-};
+function delDist() {
+  return del.sync('dist');
+}
   
   function watchFiles(){
     watch('./src/index.html', function(){
@@ -48,24 +46,24 @@ function clean(cb){
       .pipe(dest('./dist'))
       .pipe(browserSync.reload({stream:true}));
     });
-    watch('./src/**/*.js', function(){
-      return src('./build/**/*.js')
-      .pipe(dest('./dist'))
-      .pipe(browserSync.reload({stream:true}));
-    });
+   watch('./src/**/*.js', jsBuild);
+    
     watch('./src/less/**/*.less',css);
   }
 
   if(process.env.NODE_ENV ==='production'){
-    exports.build=series(clean, css/*,jsBuild*/)
+    exports.build=series(delDist, css,jsBuild)
   } else {
-    exports.build=series(clean,css,files);
+    exports.build=series(delDist,css,files);
   }
   function defaultTask(cb) {
-    clean(cb);
+    delDist();
     files();
     css();
+    jsBuild();
     server();
   }
   exports.default = series(defaultTask, watchFiles);
 
+ 
+ 
